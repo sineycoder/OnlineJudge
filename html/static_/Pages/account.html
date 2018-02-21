@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <link rel="stylesheet" href="../Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/allStyle.css">
+    <link rel="stylesheet" href="../Css/sweetalert.css">
+    <script src="../Js/jquery-1.12.4.min.js"></script>
+    <script src="../Js/bootstrap.min.js"></script>
+    <script src="../Js/vue.js"></script>
+    <script src="../Js/sweetalert.min.js"></script>
+    <script src="../Js/ichart.1.2.1.min.js"></script>
+    <!-- init the page -->
+    <script src="../Js/myJs/account.js"></script>
+
+</head>
+<body>
+<img src="../Images/load.gif" alt="" class="load">
+<script>$('.load').animate({'opacity':0.3});</script>
+<div id="account">
+    <header>
+        <div class="nav navbar-default userTopNav">
+            <div class="navbar-header">
+                <div class="navbar-brand" style="font-size: 40px;"><a :href="brandLink">{{brand}}</a></div>
+            </div>
+            <div style="width: 400px;position:relative;top:8px;left: 100px;" class="pull-left">
+                <div class="input-group">
+                    <input type="text" v-model="searchContent" class="form-control" placeholder="题目编号/题目名称"/>
+                    <span class="input-group-addon" style="padding: 0px;"><a href="#" @click="search()" class="btn btn-primary" style="width:80px;height:33px;border-radius: 0px;"><span class="glyphicon glyphicon-search" ></span></a></span>
+                </div>
+            </div>
+            <div class="pull-right">
+                <a href="#" class="btn btn-default submit_">我的提交</a>
+                <a :href="admin.href" class="btn btn-default submit_" v-show="admin.is">后台管理</a>
+            </div>
+        </div>
+    </header>
+
+    <aside style="position: relative;">
+        <section>
+            <div class="leftNav">
+                <div id="userImage" style="text-align: center;margin-bottom: 40px;">
+                    <a href="#" @click="pp()"><img width="150px" height="150px" :src="imgSrc" alt="暂无图片" style="border-radius: 50%;"/></a>
+                </div>
+                <a v-for="(item,index) in menu"  :href="links[index]":class="{btn:true,leftNavBtn:true,navActive:nowIndex==index}" @click="nowIndex=index" role="button">
+                    <span :class="icon[index]" style="padding-right: 10px;"></span>
+                    <strong>{{item}}</strong>
+                </a>
+            </div>
+        </section>
+        <section>
+            <div class="rightContent">
+                <div class="account">
+                    <div class="row">
+                        <header>
+                            <div class="col-sm-9">
+                                <div style="margin-left: 20px;">
+                                    <h3><strong>{{user.userName}}</strong></h3>
+                                    <div class="well well-sm word" v-show="user.userSign!=''">
+                                        {{user.userSign}}
+                                    </div>
+                                    <div class="well well-sm word" v-show="user.userSign==''">
+                                        暂无签名
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div id="userChart" style="margin:0 auto;"></div>
+                            </div>
+                        </header>
+                    </div>
+
+                    <div class="page-header"></div>
+
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <section>
+                                <div class="panel panel-primary" v-for="(item,index) in notice" style="margin: 20px;" >
+                                    <div class="panel-heading">
+                                        <span class="glyphicon glyphicon-info-sign"></span>
+                                        &nbsp;&nbsp;{{item.title}}
+                                    </div>
+                                    <div class="panel-body">
+                                        <div style="line-height: 25px;">
+                                            <p>{{item.content}}</p>
+                                            <div class="pull-right">
+                                                <span class="glyphicon glyphicon-dashboard"></span>
+                                                time:{{item.time}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-sm-3">
+                            <aside>
+                                <div>
+                                    <h3><strong>关于本oj</strong></h3>
+                                    <article>
+                                        本oj是开源oj，目前放置与github上，如果想了解详细信息请<a href="#">点击</a>了解情况
+                                    </article>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+</div>
+</body>
+</html>

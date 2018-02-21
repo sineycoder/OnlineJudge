@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mainPage</title>
+    <link rel="stylesheet" href="../Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/allStyle.css">
+    <link rel="stylesheet" href="../Css/sweetalert.css">
+    <script src="../Js/jquery-1.12.4.min.js"></script>
+    <script src="../Js/bootstrap.min.js"></script>
+    <script src="../Js/vue.js"></script>
+    <script src="../Js/sweetalert.min.js"></script>
+    <!-- init the page -->
+    <script src="../Js/myJs/main.js"></script>
+
+
+</head>
+<body>
+<img src="../Images/load.gif" alt="" class="load">
+<script>$('.load').animate({'opacity':0.3});</script>
+    <div id="admin">
+        <header>
+            <div class="nav navbar-default userTopNav">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="navbar-header">
+                                <div class="navbar-brand" style="font-size: 40px;"><a :href="brandLink">{{brand}}</a></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4" style="margin-top: 8px;">
+                            <div class="input-group">
+                                <input type="text" v-model="searchContent" class="form-control" placeholder="题目编号/题目名称"/>
+                                <span class="input-group-addon" style="padding: 0px;"><a href="#" @click="search()" class="btn btn-primary" style="width:80px;height:33px;border-radius: 0px;"><span class="glyphicon glyphicon-search" ></span></a></span>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-default submit_">我的提交</a>
+                            <a :href="admin.href" class="btn btn-default submit_" v-show="admin.is">后台管理</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <aside style="position: relative;">
+            <div class="leftNav">
+                <div v-for="(item1,index1) in menu">
+                    <div class="headFont"><strong>{{title[index1]}}</strong></div>
+                    <a  v-for="(item2,index2) in menu[index1]"  :href="links[index1][index2]":class="{btn:true,leftNavBtn:true,navActive:nowIndex==nums[index1]+index2}" @click="nowIndex=(nums[index1]+index2)" role="button">
+                        <span :class="icon[index1][index2]" style="padding-right: 10px;"></span>
+                            <strong>{{item2}}</strong>
+                    </a>
+                </div>
+            </div>
+            <div class="rightContent">
+                <div class="server">
+                    <div class="list">
+                        <section>
+                            <div>
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>名称</th>
+                                        <th>最大实例数</th>
+                                        <th>创建时间</th>
+                                        <th>运行状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="setServer">
+                        <section >
+                            <div class="row">
+                                <div>
+                                    <h3>添加判题服务器</h3>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/allStyle.css">
+    <script src="../Js/jquery-1.12.4.min.js"></script>
+    <script src="../Js/bootstrap.min.js"></script>
+    <script src="../Js/vue.js"></script>
+    <!-- init the page -->
+    <script src="../Js/myJs/login.js"></script>
+
+
+</head>
+<body style="background-color: #1C2B36;" >
+    <section>
+        <div id="exterior">
+
+            <!-- 重置页面 -->
+            <div id="login">
+                <div id="form0">
+                    <form action="#" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: center;">
+                                <div class="font" style="margin-top: 20px;"><strong>重置密码</strong></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <input type="text" class="form-control" placeholder="填入您注册时的邮箱" :style="inputH[0]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-5">
+                                <button type="submit" class="btn btn-info" :style="inputH[1]">继续</button>
+                            </div>
+                            <div class="col-sm-5">
+                                <button type="submit" class="btn btn-info" :style="inputH[1]" @click="signIn()">返回</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <div style="background-color: lightskyblue;padding-top: 20px;">
+                                    <div style="font-size: large;margin-bottom: 5px;"><strong>忘记了密码？</strong></div>
+                                    <div>
+                                        请填写好邮箱，并点击<strong style="color:red;">继续</strong>我们将会发送一条邮件到您邮箱，重置密码.
+                                    </div>
+                                    <br>
+                                    <div>
+                                        为了您账号的安全性，请在设置密码时尽量将密码设置在8位以上，并且大小写、符号都有最佳.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!------------------------------------------------------------------------------------------------------------>
+
+                <!-- 登录页面 -->
+                <div id="form1">
+                    <form action="#" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: center;">
+                                <div >
+                                    <img :src="icon[0].path" alt="暂无图片" :width="icon[1].width" height="icon[2].height">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: center;">
+                                <div class="font"><strong>登录</strong></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <input type="text" class="form-control" placeholder="用户名或邮箱" :style="inputH[0]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <input type="text" class="form-control" placeholder="密码"  :style="inputH[0]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-9">
+                                <div class="checkbox">
+                                    <lable>
+                                        <input type="checkbox">记住账号
+                                    </lable>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-5">
+                                <button type="submit" class="btn btn-info" :style="inputH[1]">登录</button>
+                            </div>
+                            <div class="col-sm-5">
+                                <button type="button" class="btn btn-primary" :style="inputH[1]" @click="signUp()">注册新账号</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <div style="text-align: center;">
+                                    <a href="#" @click="forget()">忘记密码？</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!------------------------------------------------------------------------------------------------------------>
+                <!-- 注册页面 -->
+                <div id="form2">
+                    <form action="#" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: center;">
+                                <div >
+                                    <img :src="icon[0].path" alt="暂无图片" :width="icon[1].width" height="icon[2].height">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: center;">
+                                <div class="font"><strong>注册</strong></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <input type="text" class="form-control" name="username" placeholder="用户名" :style="inputH[0]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <input type="text" class="form-control" name="email" placeholder="邮箱" :style="inputH[0]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <input type="text" class="form-control" name="password" placeholder="密码" :style="inputH[0]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-8 col-sm-3">
+                                <a href="#" class="pull-right"><img src="../Images/code.jpg" alt="暂无图片" class="code"></a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-5">
+                                <button type="submit" class="btn btn-info" :style="inputH[1]">注册</button>
+                            </div>
+                            <div class="col-sm-5">
+                                <button type="button" class="btn btn-primary" :style="inputH[1]" @click="signIn()">已有账号？</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10" style="text-align: center;">
+                                注册之前您必须了解相关协议信息
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div style="color:whitesmoke;clear: both;text-align: center;">
+            <div>&copy; siney</div>
+        </div>
+    </footer>
+</body>
+<script>
+</script>
+</html>

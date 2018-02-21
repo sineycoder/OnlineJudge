@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setting</title>
+    <link rel="stylesheet" href="../Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/sweetalert.css">
+    <link rel="stylesheet" href="../Css/index.css">
+    <link rel="stylesheet" href="../Css/allStyle.css">
+    <link rel="stylesheet" href="../Css/cropper.css">
+    <script src="../Js/jquery-1.12.4.min.js"></script>
+    <script src="../Js/vue.js"></script>
+    <script src="../Js/sweetalert.min.js"></script>
+    <script src="../Js/myJs/setting.js"></script>
+    <script src="../Js/bootstrap.min.js"></script>
+    <script src="../Js/index.js"></script>
+    <script src="../Js/cropper.min.js"></script>
+
+</head>
+<body>
+<img src="../Images/load.gif" alt="" class="load">
+<script>$('.load').animate({'opacity':0.3});</script>
+<div id="setting">
+
+    <header>
+        <div class="nav navbar-default userTopNav">
+            <div class="navbar-header">
+                <div class="navbar-brand" style="font-size: 40px;"><a :href="brandLink">{{brand}}</a></div>
+            </div>
+            <div style="width: 400px;position:relative;top:8px;left: 100px;" class="pull-left">
+                <div class="input-group">
+                    <input type="text" v-model="searchContent" class="form-control" placeholder="题目编号/题目名称"/>
+                    <span class="input-group-addon" style="padding: 0px;"><a href="#" @click="search()" class="btn btn-primary" style="width:80px;height:33px;border-radius: 0px;"><span class="glyphicon glyphicon-search" ></span></a></span>
+                </div>
+            </div>
+            <div class="pull-right">
+                <a href="#" class="btn btn-default submit_">我的提交</a>
+                <a :href="admin.href" class="btn btn-default submit_" v-show="admin.is">后台管理</a>
+            </div>
+        </div>
+    </header>
+
+    <aside style="position: relative;">
+        <section>
+            <div class="leftNav">
+                <div id="userImage" style="text-align: center;margin-bottom: 40px;">
+                    <a href="#"><img width="150px" height="150px" :src="imgSrc" alt="暂无图片" style="border-radius: 50%;"/></a>
+                </div>
+                <a v-for="(item,index) in menu"  :href="links[index]":class="{btn:true,leftNavBtn:true,navActive:nowIndex==index}" @click="nowIndex=index;if(nowIndex==6)exit_();" role="button">
+                    <span :class="icon[index]" style="padding-right: 10px;"></span>
+                    <strong>{{item}}</strong>
+                </a>
+            </div>
+        </section>
+        <section>
+            <div class="rightContent">
+                <div class="content">
+                    <div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            <li role="presentation" class="active"><a href="#Picture" aria-controls="Picture" role="tab" data-toggle="tab">Picture</a></li>
+                            <li role="presentation"><a href="#Username" aria-controls="Username" role="tab" data-toggle="tab">Username</a></li>
+                            <li role="presentation"><a href="#Profile" aria-controls="Profile" role="tab" data-toggle="tab">Profile</a></li>
+                            <li role="presentation"><a href="#Email" aria-controls="Email" role="tab" data-toggle="tab">Email</a></li>
+                            <li role="presentation"><a href="#Password" aria-controls="Password" role="tab" data-toggle="tab">Password</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="Picture">
+
+                                <div style="position: relative;left: 400px;top: 50px;width:300px;">
+                                    <div style="width:300px;height:300px;margin-bottom: 10px;border:1px solid black;">
+                                        <img :src="imageUrl" id="image_" style="width:300px;height:300px;">
+                                    </div>
+                                    <div style="">
+                                        <form enctype="multipart/form-data" id="uploadForm">
+                                            <input id="upload" type="file" name="file" style="width:0px;height: 0px;opacity: 0;"/>
+                                            <div class="btn-group pull-left">
+                                                <button id="uploadBtn" type="button" class="btn btn-primary" style="width:140px;" @click="onloadBtn">Upload</button>
+                                            </div>
+                                            <div class="pull-right">
+                                                <el-button type="info" id="saveBtn" style="width:140px;height:34px;" size="medium" native-type="button" @click="saveBtn" disabled>Save</el-button>
+                                            </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="Username">
+                                <div style="width: 330px;text-align: center;position: relative;left: 400px;top: 150px;">
+                                    <div style="font-size: large;margin-bottom: 20px;color: #58666E;"><strong>modify your username</strong></div>
+                                    <input type="text" placeholder="New Uusername" class="form-control" style="margin-bottom: 20px;"/>
+                                    <button type="button" class="btn btn-success" style="width: 100%;margin-bottom: 20px;">Save</button>
+                                    <div class="alert alert-warning" role="alert" style="padding: 5px;">Attention:The username can only be English or _</div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="Profile">
+                                <div style="width: 330px;text-align: center;position: relative;left: 400px;top: 50px;box-shadow: #444 0px 0px 3px;" >
+                                    <div style="padding: 10px;background-color: #23B7E5;color: #F0E9E7;font-size: large;">
+                                        Modify Profile
+                                    </div>
+                                    <div style="padding: 10px;">
+                                        <div class="input-group" style="margin-bottom: 10px;">
+                                            <span class="input-group-addon"></span>
+                                            <el-input
+                                                    placeholder="name"
+                                                    v-model="tab3.name"
+                                                    :maxlength=10
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+                                        <div class="input-group" style="margin-bottom: 10px;">
+                                            <span class="input-group-addon"></span>
+                                            <el-input
+                                                    placeholder="school"
+                                                    v-model="tab3.school"
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+
+                                        <div class="input-group" style="margin-bottom: 10px;">
+                                            <span class="input-group-addon"></span>
+                                            <el-date-picker
+                                                    v-model="tab3.date"
+                                                    type="date"
+                                                    placeholder="date"
+                                                    :editable=false
+                                                    style="width: 100%;">
+                                            </el-date-picker>
+                                        </div>
+
+
+                                        <div class="input-group" style="margin-bottom: 10px;">
+                                            <span class="input-group-addon"></span>
+                                            <el-input
+                                                    placeholder="phone"
+                                                    v-model="tab3.phone"
+                                                    :maxlength=11
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+                                        <div class="input-group" style="margin-bottom: 10px;">
+                                            <span class="input-group-addon"></span>
+                                            <el-input
+                                                    placeholder="QQ"
+                                                    v-model="tab3.QQ"
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+                                        <div class="input-group" style="margin-bottom: 10px;">
+                                            <span class="input-group-addon"></span>
+                                            <el-select v-model="tab3.gender" placeholder="gender" style="width:100%;">
+                                                <el-option
+                                                        v-for="item in options1"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </div>
+
+                                        <div class="input-group" style="margin-bottom: 10px;">
+                                            <span class="input-group-addon"></span>
+                                            <el-cascader
+                                                    expand-trigger="hover"
+                                                    :options="options2"
+                                                    v-model="tab3.address"
+                                                    size="small"
+                                                    @change="handleChange" style="width:100%;">
+                                            </el-cascader>
+                                        </div>
+                                        <div>
+                                            <el-button type="primary" size="large" style="width:100%;" native-type="submit">UPDATE</el-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="Email">
+                                <form action="#123" style="width: 330px;text-align: center;position: relative;left: 400px;top: 50px;box-shadow: #444 0px 0px 3px;" >
+                                    <div style="padding: 10px;background-color: #23B7E5;color: #F0E9E7;font-size: large;">
+                                        Modify Email
+                                    </div>
+                                    <div style="padding: 10px;">
+                                        <div style="margin-bottom: 10px;">
+                                            <el-input
+                                                    placeholder="name"
+                                                    v-model="tab3.name"
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+
+                                        <div style="margin-bottom: 10px;">
+                                            <a href=""><img src="" alt="#" class="pull-left"></a>
+                                        </div>
+
+                                        <div>
+                                            <el-button type="primary" size="large" style="width:100%;" native-type="submit">UPDATE</el-button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="Password">
+                                <form action="#123" style="width: 330px;text-align: center;position: relative;left: 400px;top: 50px;box-shadow: #444 0px 0px 3px;" >
+                                    <div style="padding: 10px;background-color: #23B7E5;color: #F0E9E7;font-size: large;">
+                                        Modify Password
+                                    </div>
+                                    <div style="padding: 10px;">
+                                        <div style="margin-bottom: 10px;">
+                                            <el-input
+                                                    placeholder="old password"
+                                                    v-model="value"
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+
+                                        <div style="margin-bottom: 10px;">
+                                            <el-input
+                                                    placeholder="new password"
+                                                    v-model="tab3.name"
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+
+                                        <div style="margin-bottom: 10px;">
+                                            <el-input
+                                                    placeholder="input again"
+                                                    v-model="tab3.name"
+                                                    clearable>
+                                            </el-input>
+                                        </div>
+
+                                        <div>
+                                            <el-button type="primary" size="large" style="width:100%;" native-type="submit">UPDATE</el-button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+</div>
+</body>
+
+</html>

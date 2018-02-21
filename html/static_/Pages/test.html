@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Js/jquery-1.12.4.min.js"></script>
+    <style>
+        *{list-style: none;padding: 0px;margin:0px;}
+
+    </style>
+</head>
+<body>
+    <img src="1.gif" alt="" class="load">
+    <div class="t">
+    	
+    </div>
+</body>
+
+<script>
+    $(".load").animate({'opacity':'0.3'});
+    $(function(){
+        $.ajax({
+            type:'post',
+            url:'http://localhost:8080/springmvc/load',
+            data:'name=123123',
+            success:function(data){
+                $(".load").css({'display':'none'});
+                $('.t').text(data);
+            },
+            error:function(re,e){
+                alert(e);
+                $(".load").css({'display':'none'});
+            }
+        });
+    });
+</script>
+
+</html>

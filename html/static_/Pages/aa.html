@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../Css/cropper.min.css">
+    <script src="../Js/jquery-1.12.4.min.js"></script>
+    <script src="cropper.js"></script>
+
+    <style>
+        #image{
+            max-width:100%;
+        }
+    </style>
+
+
+</head>
+<body>
+<div style="width:150px;height:150px;">
+    <img src="../Images/2.jpg" alt="" id="image" style="height: 100%;width:100%;">
+</div>
+<button type="button" id="sub">click</button>
+</body>
+
+<script>
+    var im = {
+        'x':0,
+        'y':0,
+        'width':0,
+        'height':0,
+        'rotate':0,
+        'scaleX':0,
+        'scaleY':0
+    }
+    $(function(){
+        $('#sub').click(function(){
+            $.ajax({
+                url:"/image",
+                type:"get",
+                data:{'aaa':'aaa','bbb':'bbb'},
+                success:function(data,res,status){
+                    alert(data);
+                },
+                error:function(){
+
+                }
+            });
+
+
+        });
+
+        $('#image').cropper({
+            viewMode:3,
+            dragMode : "none",
+            aspectRatio: 1 / 1,
+            background:false,
+            autoCropArea:0.75,
+            minContainerHeight:150,
+            minContainerWidth:150,
+            crop: function(e) {
+                // Output the result data for cropping image.
+                im.x = e.x;
+                im.x = e.y;
+                im.x = e.width;
+                im.x = e.height;
+                im.x = e.rotate;
+                im.x = e.scaleX;
+                im.x = e.scaleY;
+
+            }
+        });
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static_/Css/bootstrap.min.css">
+    <link rel="stylesheet" href="static_/Css/bootstrap-datetimepicker.min.css">
+    <script src="static_/Js/jquery-1.12.4.min.js"></script>
+    <script src="static_/Js/bootstrap.min.js"></script>
+    <script src="static_/Js/bootstrap-datetimepicker.min.js"></script>
+    <script src="static_/Js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <form action="" class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th-list"></span></span>
+                        <input type="text" id="datetime" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" id="cl" class="btn btn-info">click</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    $(function(){
+        $('#datetime').datetimepicker({
+            format:'yyyy-mm-dd hh:ii:ss',
+            language:'zh-CN',
+            autoclose:true,
+            todayBtn: true
+        });
+    });
+</script>
+</html>
