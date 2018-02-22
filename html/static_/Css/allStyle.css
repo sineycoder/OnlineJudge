@@ -1,5 +1,5 @@
 
-*{list-style: none;margin:0px;padding:0px;font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;}
+*{list-style: none;margin:0px;padding:0px;font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,\\5FAE\8F6F\96C5\9ED1,Arial,sans-serif;}
 a{text-decoration: none !important;}
 /*scroll*/
     /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
@@ -8,7 +8,7 @@ a{text-decoration: none !important;}
 ::-webkit-scrollbar-track {  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.8);  border-radius: 10px;  background-color: #F5F5F5; }
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb {  border-radius: 10px;  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  background-color: #555; }
-body{overflow-y: hidden;}
+body{overflow-y: hidden;min-width: 900px;}
 
 /* index.html */
 .shadow{box-shadow: #999 0px 0px 3px;border-radius: 5px;}
@@ -170,3 +170,16 @@ body{overflow-y: hidden;}
 #setting .content .tab-content > div{background-color: white;height: 530px;}
 #setting #Profile .el-input__prefix{display: none;}
 #setting #Profile .el-input__inner{border-top-left-radius: 0px;border-bottom-left-radius: 0px;height: 34px;padding-left: 10px;}
+
+
+#coding{opacity: 0;}
+#coding .leftNavBtn{width:100%;text-align: center; font-size:small;color: #447B81;padding-right: 25px;}
+#coding .leftNavBtn:hover,.navActive{box-shadow: #444 0px 0px 3px;border-radius: 5px;background-color: #16232D;color: antiquewhite !important;}
+#coding .leftNav{width:205px;background-color:#1C2B36;position: absolute;padding-top: 1%;}
+#coding .userTopNav{min-width:907px;height: 50px;}
+#coding .headFont{padding-left: 20px;color: #6DA1BB;}
+#coding .submit_{height: 8vh;border-radius: 0px;border: 0px;color:#428BCA;background-color: #F8F8F8;display: table-cell;vertical-align: middle;}
+#coding .submit_:hover{background-color: #F1F1F1}
+#coding .rightContent{min-width:702px;box-shadow: #444 0px 0px 1px;position: absolute; left: 205px;overflow-y: scroll;background-color: #bde7ff;}
+#coding .row{margin-left: 0px;margin-right: 0px;}
+

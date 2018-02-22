@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>coding</title>
+    <link rel="stylesheet" href="../Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/allStyle.css">
+    <link rel="stylesheet" href="../Css/sweetalert.css">
+    <script src="../Js/jquery-1.12.4.min.js"></script>
+    <script src="../Js/bootstrap.min.js"></script>
+    <script src="../Js/vue.js"></script>
+    <script src="../Js/sweetalert.min.js"></script>
+    <script src="../Js/myJs/coding.js"></script>
+
+    <style>
+        .smallFont{
+            font-size: 5px;
+            font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, 微软雅黑, 黑体, sans-serif;
+            color: rgb(88, 102, 110);
+            -webkit-font-smoothing: antialiased;
+        }
+        .problemContent{
+            flex: 3;margin-right: 90px;
+        }
+        .problemContent > .panel{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<img src="../Images/load.gif" alt="" class="load">
+<script>$('.load').animate({'opacity':0.3});</script>
+<div id="coding">
+    <header>
+        <div class="nav navbar-default userTopNav">
+            <div class="navbar-header">
+                <div class="navbar-brand" style="font-size: 40px;"><a :href="brandLink">{{brand}}</a></div>
+            </div>
+
+        </div>
+    </header>
+
+    <aside style="position: relative;">
+        <section>
+            <div class="leftNav">
+                <div id="userImage" style="text-align: center;margin-bottom: 40px;">
+                    <a href="#" @click="pp()"><img width="150px" height="150px" :src="imgSrc" alt="暂无图片" style="border-radius: 50%;"/></a>
+                </div>
+                <a v-for="(item,index) in menu"  :href="links[index]":class="{btn:true,leftNavBtn:true,navActive:nowIndex==index}" @click="nowIndex=index;if(nowIndex==6)exit_();" role="button">
+                    <span :class="icon[index]" style="padding-right: 10px;"></span>
+                    <strong>{{item}}</strong>
+                </a>
+            </div>
+        </section>
+        <section>
+
+            <div class="rightContent">
+                <div style="background-color: #F0F3F4;height: 86px;padding-left: 15px;padding-right: 15px;padding-top: 15px;">
+                    <h3 style="margin: 0px;"><strong>1000 A + B</strong></h3>
+                    <div class="pull-left" style="padding: 5px;line-height: 2;">
+                        <span class="glyphicon glyphicon-time" style="color: rgb(88, 102, 110);"></span>
+                        <span class="smallFont"> Time Limit : 1s</span>
+                    </div>
+                    <div class="pull-left" style="padding: 5px;line-height: 2;">
+                        <span class="glyphicon glyphicon-glass" style="color: rgb(88, 102, 110);"></span>
+                        <span class="smallFont"> Memory Limit : C/C++ 64KB , others 512MB</span>
+                    </div>
+                    <div class="pull-left" style="padding: 5px;line-height: 2;">
+                        <span class="glyphicon glyphicon-tags" style="color: rgb(88, 102, 110);"></span>
+                        <span class="smallFont">&nbsp;Tag : easy</span>
+                    </div>
+                </div>
+                <div style="margin: 15px;display: flex;min-width: 1000px;">
+                    <div class="problemContent">
+                        <div class="panel panel-default" v-for="(item,index) in problemContent">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{item.title}}</h3>
+                            </div>
+                            <div class="panel-body">
+                               {{item.content}}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        safd
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    hikari:
+      username: root
+      password: 398653206
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/onlinejudge?useUnicode=true&characterEncoding=utf8&useSSL=false
+      max-lifetime: 176500
+      connection-timeout: 30000
+      minimum-idle: 1
+  redis:
+    host: 192.168.110.130
+    port: 6379
+    password: 398653206
+    timeout: 500    #超时时间
+    pool:
+      maxWaitMillis: -1   #连接池最大阻塞等待时间（使用负值表示没有限制）
+
+
+server:
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.jsut.coder.po
+logging:
+  level:
+    root: info
+    cn:
+      jsut:
+        scoder:
+          dao: debug
+  file: D:/a.log
+
