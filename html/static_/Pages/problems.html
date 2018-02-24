@@ -2,120 +2,196 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>problem</title>
-    <link rel="stylesheet" href="../Css/bootstrap.min.css">
+    <title>problems</title>
+    <link rel="stylesheet" href="../Css/eui.css">
+    <link rel="stylesheet" href="../Css/diyBootstrap.css">
     <link rel="stylesheet" href="../Css/allStyle.css">
-    <link rel="stylesheet" href="../Css/sweetalert.css">
+    <link rel="stylesheet" href="../Css/font-awesome.min.css">
     <script src="../Js/jquery-1.12.4.min.js"></script>
-    <script src="../Js/bootstrap.min.js"></script>
     <script src="../Js/vue.js"></script>
-    <script src="../Js/sweetalert.min.js"></script>
+    <script src="../Js/eui.js"></script>
     <!-- init the page -->
     <script src="../Js/myJs/problems.js"></script>
     <style>
-
+        [class^="el-icon-fa"], [class*="el-icon-fa"] {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome!important;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
     </style>
 </head>
 <body>
 <img src="../Images/load.gif" alt="" class="load">
 <script>$('.load').animate({'opacity':0.3});</script>
-<div id="problems">
-    <header>
-        <div class="nav navbar-default userTopNav">
-            <div class="navbar-header">
-                <div class="navbar-brand" style="font-size: 40px;"><a :href="brandLink">{{brand}}</a></div>
-            </div>
-            <div style="width: 400px;position:relative;top:8px;left: 100px;" class="pull-left">
-                <div class="input-group">
-                    <input type="text" v-model="searchContent" class="form-control" placeholder="题目编号/题目名称"/>
-                    <span class="input-group-addon" style="padding: 0px;"><a href="#" @click="search()" class="btn btn-primary" style="width:80px;height:33px;border-radius: 0px;"><span class="glyphicon glyphicon-search" ></span></a></span>
-                </div>
-            </div>
-            <div class="pull-right">
-                <a href="#" class="btn btn-default submit_">我的提交</a>
-                <a :href="admin.href" class="btn btn-default submit_" v-show="admin.is">后台管理</a>
-            </div>
-        </div>
-    </header>
+<el-container id="problems">
+    <el-header class="head" style="background-color: #F8F8F8;">
+        <el-row>
+            <el-col :span="4">
+                <a :href="brandLink" class="brand">{{brand}}</a>
+            </el-col>
+            <el-col :span="5"  style="position: relative;top:5px;">
+                <el-input
+                        placeholder="请输入内容"
+                        v-model="input1"
+                        clearable>
+                </el-input>
+            </el-col>
+            <el-col :span="1" class="search-btn" style="position: relative;top:5px;">
+                <el-button type="primary" icon="el-icon-search">搜索</el-button>
+            </el-col>
+            <el-col :span="14">
+                <el-menu  class="el-menu-demo dropdown" mode="horizontal" @select="handleSelect" style="background-color: #F8F8F8;float:right;">
+                    <el-submenu index="1">
+                        <template slot="title">root</template>
+                        <el-menu-item index="1-1">submission</el-menu-item>
+                        <el-menu-item index="1-2">administration</el-menu-item>
+                        <el-menu-item index="1-3">exit</el-menu-item>
+                    </el-submenu>
+                </el-menu>
+            </el-col>
+        </el-row>
+    </el-header>
 
-    <aside style="position: relative;">
-        <section>
-            <div class="leftNav">
-                <div id="userImage" style="text-align: center;margin-bottom: 40px;">
-                    <a href="#" @click="pp()"><img width="150px" height="150px" :src="imgSrc" alt="暂无图片" style="border-radius: 50%;"/></a>
-                </div>
-                <a v-for="(item,index) in menu"  :href="links[index]":class="{btn:true,leftNavBtn:true,navActive:nowIndex==index}" @click="nowIndex=index;if(nowIndex==6)exit_();" role="button">
-                    <span :class="icon[index]" style="padding-right: 10px;"></span>
-                    <strong>{{item}}</strong>
-                </a>
-            </div>
-        </section>
-        <section>
-            <div class="rightContent">
-                <div class="problems">
-                    <section>
-                        <table class="table table-striped">
-                            <thead style="text-align: center;">
-                                <tr>
-                                    <th style="width: 10px;text-align: center;" v-html="tb_title[0]"></th>
-                                    <th style="width:10px;">
-                                        <span>{{tb_title[1]}}</span>
-                                    </th>
-                                    <th style="width: 800px;">
-                                        <span>{{tb_title[2]}}</span>
-                                    </th>
-                                    <th style="width:150px;text-align: center">
-                                        <span>{{tb_title[3]}}</span>
-                                    </th>
-                                    <th style="width:80px;">
-                                        <span>{{tb_title[4]}}</span>
-                                    </th>
-                                    <th>
-                                        <span>{{tb_title[5]}}</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(item,index) in tb_content">
-                                    <td style="text-align: center;">
-                                        <span class="glyphicon glyphicon-ok" style="color:green;" v-show="tb_content[index][0]=='pass'"></span>
-                                        <span class="glyphicon glyphicon-minus" style="color:red;" v-show="tb_content[index][0]=='not_pass'"></span>
-                                    </td>
-                                    <!-- 动态生成链接 -->
-                                    <td><a :href="'#/'+tb_content[index][1]">{{tb_content[index][1]}}</a></td>
-                                    <td><a :href="'#/'+tb_content[index][1]">{{tb_content[index][2]}}</a></td>
-                                    <td><span style="background: #94b3ff;border-radius: 5px;display: block;text-align: center;color: white;"><strong>{{tb_content[index][3]}}</strong></span></td>
-                                    <td>{{tb_content[index][4]}}</td>
-                                    <td>
-                                        <div class="progress" style="width: 11vw;box-shadow: #444 0px 0px 5px;height: 20px;margin: 0px;">
-                                            <div class="progress-bar progress-bar-striped active" aria-valuemin="0.00" aria-valuemax="100.00" :style="'width:'+tb_content[index][5]">
-                                                <span style="color: #b1d1fd;"><strong>{{tb_content[index][5]}}</strong></span>
-                                            </div>
+    <el-container class="contain">
+        <el-aside class="leftNav" style="width:205px;">
+            <el-row>
+                <el-col :span="24">
+                    <div  style="text-align: center;margin-bottom: 40px;margin-top: 20px;">
+                        <a href="#" @click="pp()"><img width="150px" height="150px" :src="imgSrc" alt="暂无图片" style="border-radius: 50%;"/></a>
+                    </div>
+                    <el-menu
+                            class="el-menu-vertical-demo"
+                            @open="handleOpen"
+                            @close="handleClose"
+                            background-color="#1C2B36"
+                            text-color="#447B81"
+                            active-text-color="antiquewhite"
+                    >
+                        <el-menu-item index="1" style="text-align: center;font-weight: 700;font-size: 13px;">
+                            <i class="fa el-icon-fa-list" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <span slot="title">题库</span>
+                        </el-menu-item>
+
+                        <el-menu-item index="2" style="text-align: center;font-weight: 700;font-size: 13px;">
+                            <i class="fa el-icon-fa-bar-chart-o" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <span slot="title">排名</span>
+                        </el-menu-item>
+
+                        <el-menu-item index="3" style="text-align: center;font-weight: 700;font-size: 13px;">
+                            <i class="fa el-icon-fa-hand-o-right" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <span slot="title">提交</span>
+                        </el-menu-item>
+
+                        <el-menu-item index="4" style="text-align: center;font-weight: 700;font-size: 13px;">
+                            <i class="fa el-icon-fa-rocket" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <span slot="title">比赛</span>
+                        </el-menu-item>
+
+                        <el-menu-item index="5" style="text-align: center;font-weight: 700;font-size: 13px;">
+                            <i class="fa el-icon-fa-question-circle" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <span slot="title">帮助</span>
+                        </el-menu-item>
+
+                        <el-menu-item index="6" style="text-align: center;font-weight: 700;font-size: 13px;">
+                            <i class="fa el-icon-fa-gears" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <span slot="title">设置</span>
+                        </el-menu-item>
+
+                    </el-menu>
+                </el-col>
+            </el-row>
+        </el-aside>
+        <el-main class="rightContent">
+            <div>
+                <el-row>
+                    <template>
+                        <el-table
+                                :data="tableData"
+                                style="width: 100%;">
+                            <el-table-column
+                                    prop="status"
+                                    label="status"
+                                    width="65">
+                                <template slot-scope="scope">
+                                    <i class="fa el-icon-fa-check-circle" style="color:green;" v-show="scope.row.status=='pass'"></i>
+                                    <i class="fa el-icon-fa-spinner el-icon-fa-spin" style="color:red;" v-show="scope.row.status=='not_pass'"></i>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    prop="id"
+                                    label="I D"
+                                    sortable
+                                    width="65">
+                            </el-table-column>
+
+                            <el-table-column
+                                    prop="problem"
+                                    label="problem"
+                                    width="500">
+                            </el-table-column>
+
+                            <el-table-column
+                                    prop="tag"
+                                    label="tag"
+                                    width="100"
+                                    :filters="[{ text: '基础题', value: '基础题' }, { text: '复杂题', value: '复杂题' }]"
+                                    :filter-method="filterTag"
+                                    filter-placement="bottom-end">
+                                <template slot-scope="scope">
+                                    <el-tag
+                                            :type="scope.row.tag === '基础题' ? 'primary' : 'success'"
+                                            close-transition>{{scope.row.tag}}</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    prop="difficulty"
+                                    label="difficulty"
+                                    width="100"
+                                    :filters="[{ text: 'easy', value: 'easy' }, { text: 'middium', value: 'middium' }]"
+                                    :filter-method="filterDifficulty"
+                                    filter-placement="bottom-end">
+                                <template slot-scope="scope">
+                                    <el-tag
+                                            :type="scope.row.difficulty === 'easy' ? 'primary' : 'success'"
+                                            close-transition>{{scope.row.difficulty}}</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    prop="pass"
+                                    label="pass"
+                                    sortable>
+                                <template slot-scope="scope">
+                                    <div class="progress" style="box-shadow: #444 0px 0px 5px;height: 20px;margin: 0px;">
+                                        <div class="progress-bar progress-bar-striped active" aria-valuemin="0.00" aria-valuemax="100.00" :style="'width:'+scope.row.pass+'%'">
+                                            <div style="color: black;min-width: 30px;">{{scope.row.pass}}%</div>
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </section>
-                </div>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li :class="{disabled:page.pageNow==1}">
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li v-for="item in page.pageNum" :class="{active:page.pageNow==item}"><a href="#">{{item}}</a></li>
-                        <li :class="{disabled:page.pageNow==page.pageNum}">
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                                    </div>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </template>
+                </el-row>
             </div>
-        </section>
-    </aside>
-</div>
+            <div>
+                <el-row>
+                    <div class="block pull-right">
+                        <el-pagination
+                                background
+                                @size-change="handleSizeChange"
+                                @current-change="handleCurrentChange"
+                                :current-page.sync="currentPage3"
+                                :page-size="100"
+                                layout="prev, pager, next, jumper"
+                                :total="1000">
+                        </el-pagination>
+                    </div>
+                </el-row>
+            </div>
+        </el-main>
+    </el-container>
+</el-container>
 </body>
 </html>

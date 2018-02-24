@@ -3,100 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <title>mainPage</title>
-    <link rel="stylesheet" href="../Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/eui.css">
     <link rel="stylesheet" href="../Css/allStyle.css">
-    <link rel="stylesheet" href="../Css/sweetalert.css">
     <script src="../Js/jquery-1.12.4.min.js"></script>
-    <script src="../Js/bootstrap.min.js"></script>
     <script src="../Js/vue.js"></script>
-    <script src="../Js/sweetalert.min.js"></script>
-    <!-- init the page -->
+    <script src="../Js/eui.js"></script>
     <script src="../Js/myJs/main.js"></script>
+    <!-- init the page -->
 
 
 </head>
 <body>
 <img src="../Images/load.gif" alt="" class="load">
 <script>$('.load').animate({'opacity':0.3});</script>
-    <div id="admin">
-        <header>
-            <div class="nav navbar-default userTopNav">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="navbar-header">
-                                <div class="navbar-brand" style="font-size: 40px;"><a :href="brandLink">{{brand}}</a></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4" style="margin-top: 8px;">
-                            <div class="input-group">
-                                <input type="text" v-model="searchContent" class="form-control" placeholder="题目编号/题目名称"/>
-                                <span class="input-group-addon" style="padding: 0px;"><a href="#" @click="search()" class="btn btn-primary" style="width:80px;height:33px;border-radius: 0px;"><span class="glyphicon glyphicon-search" ></span></a></span>
-                            </div>
-                        </div>
-                        <div class="pull-right">
-                            <a href="#" class="btn btn-default submit_">我的提交</a>
-                            <a :href="admin.href" class="btn btn-default submit_" v-show="admin.is">后台管理</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <el-container id="admin">
 
-        <aside style="position: relative;">
-            <div class="leftNav">
-                <div v-for="(item1,index1) in menu">
-                    <div class="headFont"><strong>{{title[index1]}}</strong></div>
-                    <a  v-for="(item2,index2) in menu[index1]"  :href="links[index1][index2]":class="{btn:true,leftNavBtn:true,navActive:nowIndex==nums[index1]+index2}" @click="nowIndex=(nums[index1]+index2)" role="button">
-                        <span :class="icon[index1][index2]" style="padding-right: 10px;"></span>
-                            <strong>{{item2}}</strong>
-                    </a>
-                </div>
-            </div>
-            <div class="rightContent">
-                <div class="server">
-                    <div class="list">
-                        <section>
-                            <div>
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>名称</th>
-                                        <th>最大实例数</th>
-                                        <th>创建时间</th>
-                                        <th>运行状态</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="setServer">
-                        <section >
-                            <div class="row">
-                                <div>
-                                    <h3>添加判题服务器</h3>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+        <el-header class="head" style="background-color: #F8F8F8;">
+            <el-row>
+                <el-col :span="4">
+                    <a :href="brandLink" class="brand">{{brand}}</a>
+                </el-col>
+                <el-col :span="5"  style="position: relative;top:5px;">
+                    <el-input
+                            placeholder="请输入内容"
+                            v-model="input10"
+                            clearable>
+                    </el-input>
+                </el-col>
+                <el-col :span="1" class="search-btn" style="position: relative;top:5px;">
+                    <el-button type="primary" icon="el-icon-search">搜索</el-button>
+                </el-col>
+                <el-col :span="14">
+                    <el-menu  class="el-menu-demo dropdown" mode="horizontal" @select="handleSelect" style="background-color: #F8F8F8;float:right;">
+                        <el-submenu index="1">
+                            <template slot="title">root</template>
+                            <el-menu-item index="1-1">submission</el-menu-item>
+                            <el-menu-item index="1-2">administration</el-menu-item>
+                            <el-menu-item index="1-3">exit</el-menu-item>
+                        </el-submenu>
+                    </el-menu>
+                </el-col>
+            </el-row>
+        </el-header>
 
-                </div>
-            </div>
-        </aside>
-    </div>
+        <el-container class="contain">
+            <el-aside class="leftNav" style="width:205px;">
+                <el-row>
+                    <el-col :span="24">
+                        <el-menu
+                                default-active="1-1"
+                                class="el-menu-vertical-demo"
+                                @open="handleOpen"
+                                @close="handleClose"
+                                background-color="#1C2B36"
+                                text-color="#fff"
+                                >
+                            <el-submenu index="1">
+                                <template slot="title">
+                                    <i class="el-icon-setting"></i>
+                                    <span>系统管理</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="1-1">
+                                        <span slot="title">服务器管理</span>
+                                    </el-menu-item>
+
+                                    <el-menu-item index="1-2">
+                                        <span slot="title">用户管理</span>
+                                    </el-menu-item>
+                                </el-menu-item-group>
+                            </el-submenu>
+
+                            <el-submenu index="2">
+                                <template slot="title">
+                                    <i class="el-icon-news"></i>
+                                    <span>公告管理</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="2-1">
+                                        <span slot="title">公告设置</span>
+                                    </el-menu-item>
+
+                                </el-menu-item-group>
+                            </el-submenu>
+
+                            <el-submenu index="3">
+                                <template slot="title">
+                                    <i class="el-icon-edit-outline"></i>
+                                    <span>题目管理</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="3-1">
+                                        <span slot="title">题目列表</span>
+                                    </el-menu-item>
+
+                                    <el-menu-item index="3-2">
+                                        <span slot="title">新建题目</span>
+                                    </el-menu-item>
+                                </el-menu-item-group>
+                            </el-submenu>
+
+                            <el-submenu index="4">
+                                <template slot="title">
+                                    <i class="el-icon-service"></i>
+                                    <span>比赛管理</span>
+                                </template>
+                                <el-menu-item-group>
+                                    <el-menu-item index="4-1">
+                                        <span slot="title">比赛信息</span>
+                                    </el-menu-item>
+
+                                    <el-menu-item index="4-2">
+                                        <span slot="title">新建比赛</span>
+                                    </el-menu-item>
+                                </el-menu-item-group>
+                            </el-submenu>
+
+                        </el-menu>
+                    </el-col>
+                </el-row>
+            </el-aside>
+            <el-main class="rightContent">
+                <template>
+                    <el-table
+                            :data="tableData"
+                            style="width: 100%">
+                        <el-table-column
+                                prop="date"
+                                label="日期"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="姓名"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="address"
+                                label="地址">
+                        </el-table-column>
+                    </el-table>
+                </template>
+            </el-main>
+        </el-container>
+
+    </el-container>
 </body>
 <script>
 
