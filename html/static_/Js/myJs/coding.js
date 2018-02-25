@@ -39,12 +39,6 @@ $(function(){
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            }
         }
     }).$mount("#coding");
     $.ajax({
@@ -53,7 +47,7 @@ $(function(){
         dataType:'json',
         success:function(res,name,status){
             $('.load').css({'display':'none'});
-            $('#coding').animate({'opacity':'1'},500);
+            $('#coding').animate({'opacity':'1'},1000);
 
         },
         error:function(excep,text){

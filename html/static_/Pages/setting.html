@@ -13,14 +13,7 @@
     <script src="../Js/myJs/setting.js"></script>
     <script src="../Js/cropper.min.js"></script>
     <style>
-        [class^="el-icon-fa"], [class*="el-icon-fa"] {
-            display: inline-block;
-            font: normal normal normal 14px/1 FontAwesome!important;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+       
         .el-tabs__content{height:500px;}
     </style>
 
@@ -42,7 +35,7 @@
                 </el-input>
             </el-col>
             <el-col :span="1" class="search-btn" style="position: relative;top:5px;">
-                <el-button type="primary" icon="el-icon-search">搜索</el-button>
+                <el-button type="primary" icon="search">搜索</el-button>
             </el-col>
             <el-col :span="14">
                 <el-menu  class="el-menu-demo dropdown" mode="horizontal" @select="handleSelect" style="background-color: #F8F8F8;float:right;">
@@ -65,39 +58,38 @@
                     </div>
                     <el-menu
                             class="el-menu-vertical-demo"
-                            @open="handleOpen"
-                            @close="handleClose"
+                            @select="handleSelect"
                             background-color="#1C2B36"
                             text-color="#447B81"
                             active-text-color="antiquewhite"
                     >
                         <el-menu-item index="1" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-list" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-list" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">题库</span>
                         </el-menu-item>
 
                         <el-menu-item index="2" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-bar-chart-o" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-bar-chart-o" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">排名</span>
                         </el-menu-item>
 
                         <el-menu-item index="3" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-hand-o-right" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-hand-o-right" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">提交</span>
                         </el-menu-item>
 
                         <el-menu-item index="4" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-rocket" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-rocket" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">比赛</span>
                         </el-menu-item>
 
                         <el-menu-item index="5" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-question-circle" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-question-circle" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">帮助</span>
                         </el-menu-item>
 
                         <el-menu-item index="6" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-gears" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-gears" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">设置</span>
                         </el-menu-item>
 
@@ -109,7 +101,7 @@
             <div style="box-shadow: #444 0px 0px 1px;">
                 <el-tabs type="border-card">
                     <el-tab-pane>
-                        <span slot="label"><i class="fa el-icon-fa-file-picture-o"></i> Picture</span>
+                        <span slot="label"><i class="fa fa-file-picture-o"></i> Picture</span>
                         <div style="position: relative;top: 50px;margin-left:auto;margin-right:auto;width:300px;">
                             <div style="width:300px;height:300px;margin-bottom: 10px;border:1px solid black;">
                                 <img :src="imageUrl" id="image_" style="width:300px;height:300px;">
@@ -126,7 +118,7 @@
                         </div>
                     </el-tab-pane>
                     <el-tab-pane>
-                        <span slot="label"><i class="fa el-icon-fa-child"></i> Username</span>
+                        <span slot="label"><i class="fa fa-child"></i> Username</span>
 
                         <div style="width: 350px;text-align: center;position: relative;top: 120px;margin-left:auto;margin-right:auto;">
                             <div style="font-size: large;margin-bottom: 20px;color: #58666E;"><strong>modify your username</strong></div>
@@ -150,7 +142,7 @@
                         </div>
                     </el-tab-pane>
                     <el-tab-pane>
-                        <span slot="label"><i class="fa el-icon-fa-user"></i> Profile</span>
+                        <span slot="label"><i class="fa fa-user"></i> Profile</span>
                         <div style="width: 330px;text-align: center;position: relative;margin-left:auto;margin-right:auto;top: 40px;box-shadow: #444 0px 0px 3px;" >
                             <div style="padding: 10px;background-color: #23B7E5;color: #F0E9E7;font-size: large;">
                                 Modify Profile
@@ -231,7 +223,7 @@
                         </div>
                     </el-tab-pane>
                     <el-tab-pane>
-                        <span slot="label"><i class="fa el-icon-fa-envelope-o"></i> Email</span>
+                        <span slot="label"><i class="fa fa-envelope-o"></i> Email</span>
                         <div style="width: 330px;text-align: center;position: relative;margin-left:auto;margin-right:auto;top: 50px;box-shadow: #444 0px 0px 3px;" >
                             <div style="padding: 10px;background-color: #23B7E5;color: #F0E9E7;font-size: large;">
                                 Modify Email
@@ -256,7 +248,7 @@
                         </div>
                     </el-tab-pane>
                     <el-tab-pane>
-                        <span slot="label"><i class="fa el-icon-fa-key"></i> Password</span>
+                        <span slot="label"><i class="fa fa-key"></i> Password</span>
                         <div style="width: 330px;text-align: center;position: relative;margin-left:auto;margin-right:auto;top: 50px;box-shadow: #444 0px 0px 3px;" >
                             <div style="padding: 10px;background-color: #23B7E5;color: #F0E9E7;font-size: large;">
                                 Modify Password

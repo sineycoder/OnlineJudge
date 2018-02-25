@@ -42,12 +42,6 @@ $(function(){
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            }
         }
     }).$mount("#admin");
 
@@ -57,7 +51,7 @@ $(function(){
        success:function(status,data){
            //取消loading画面
            $('.load').css({'display':'none'});
-           $('#admin').animate({'opacity':'1'},500);
+           $('#admin').animate({'opacity':'1'},1000);
        },
        error:function(){
 

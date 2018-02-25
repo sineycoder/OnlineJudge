@@ -11,17 +11,6 @@
     <script src="../Js/eui.js"></script>
     <script src="../Js/myJs/submit.js"></script>
 
-    <style>
-        [class^="el-icon-fa"], [class*="el-icon-fa"] {
-            display: inline-block;
-            font: normal normal normal 14px/1 FontAwesome!important;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-    </style>
-
 </head>
 <body>
 <img src="../Images/load.gif" alt="" class="load">
@@ -40,7 +29,7 @@
                 </el-input>
             </el-col>
             <el-col :span="1" class="search-btn" style="position: relative;top:5px;">
-                <el-button type="primary" icon="el-icon-search">搜索</el-button>
+                <el-button type="primary" icon="search">搜索</el-button>
             </el-col>
             <el-col :span="14">
                 <el-menu  class="el-menu-demo dropdown" mode="horizontal" @select="handleSelect" style="background-color: #F8F8F8;float:right;">
@@ -64,39 +53,38 @@
                     </div>
                     <el-menu
                             class="el-menu-vertical-demo"
-                            @open="handleOpen"
-                            @close="handleClose"
+                            @select="handleSelect"
                             background-color="#1C2B36"
                             text-color="#447B81"
                             active-text-color="antiquewhite"
                     >
                         <el-menu-item index="1" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-list" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-list" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">题库</span>
                         </el-menu-item>
 
                         <el-menu-item index="2" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-bar-chart-o" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-bar-chart-o" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">排名</span>
                         </el-menu-item>
 
                         <el-menu-item index="3" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-hand-o-right" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-hand-o-right" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">提交</span>
                         </el-menu-item>
 
                         <el-menu-item index="4" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-rocket" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-rocket" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">比赛</span>
                         </el-menu-item>
 
                         <el-menu-item index="5" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-question-circle" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-question-circle" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">帮助</span>
                         </el-menu-item>
 
                         <el-menu-item index="6" style="text-align: center;font-weight: 700;font-size: 13px;">
-                            <i class="fa el-icon-fa-gears" style="font-size: 16px;position: relative;right:8px;"></i>
+                            <i class="fa fa-gears" style="font-size: 16px;position: relative;right:8px;"></i>
                             <span slot="title">设置</span>
                         </el-menu-item>
 
@@ -120,7 +108,7 @@
                             </el-input>
                         </el-col>
                         <el-col :span="1" class="search-btn">
-                            <el-button size="medium" icon="el-icon-search">搜索</el-button>
+                            <el-button size="medium" icon="search">搜索</el-button>
                         </el-col>
                     </div>
 

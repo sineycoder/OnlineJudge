@@ -40,12 +40,6 @@ $(function(){
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
@@ -60,7 +54,7 @@ $(function(){
         dataType:'json',
         success:function(res,name,status){
             $('.load').css({'display':'none'});
-            $('#contest').animate({'opacity':'1'},500);
+            $('#contest').animate({'opacity':'1'},1000);
 
         },
         error:function(excep,text){

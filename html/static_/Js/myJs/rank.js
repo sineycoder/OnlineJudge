@@ -30,7 +30,7 @@ $(function(){
             ],
             title:'Ranklist',
             input1:'',
-            currentPage3:5,
+            currentPage3:1,
             tableData: [{
                 rank:1,
                 name:'siney',
@@ -70,12 +70,6 @@ $(function(){
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
@@ -101,7 +95,7 @@ $(function(){
 
 
             $('.load').css({'display':'none'});
-            $('#rank').animate({'opacity':'1'},500);
+            $('#rank').animate({'opacity':'1'},1000);
 
         },
         error:function(excep,text){

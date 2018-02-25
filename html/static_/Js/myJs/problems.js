@@ -18,7 +18,6 @@ $(function(){
             page:{'pageNow':'10','pageNum':10},
             returnPage:"../Admin/index.html",                        //右上角返回主界面地址
             brand:"JSUT",                                   //左上角标题
-            links:["problem.html","#","#","#","#","#"],                //每个标签的链接
             brandLink:"#",                                  //左上角标题链接
             imgSrc:"../Images/default_portrait.jpg",        //用户图片地址
             admin:{href:"#",is:true},                        //是否显示后台窗口
@@ -63,12 +62,6 @@ $(function(){
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
@@ -95,7 +88,7 @@ $(function(){
 
             vm.tb_content=res;
             $('.load').css({'display':'none'});
-            $('#problems').animate({'opacity':'1'},500);
+            $('#problems').animate({'opacity':'1'},1000);
 
         },
         error:function(excep,text){

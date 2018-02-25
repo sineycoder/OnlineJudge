@@ -8,7 +8,7 @@
     <script src="../Js/jquery-1.12.4.min.js"></script>
     <script src="../Js/vue.js"></script>
     <script src="../Js/eui.js"></script>
-    <script src="../Js/myJs/main.js"></script>
+    <script src="../Js/myJs/admin.js"></script>
     <!-- init the page -->
 
 
@@ -17,7 +17,6 @@
 <img src="../Images/load.gif" alt="" class="load">
 <script>$('.load').animate({'opacity':0.3});</script>
     <el-container id="admin">
-
         <el-header class="head" style="background-color: #F8F8F8;">
             <el-row>
                 <el-col :span="4">
@@ -61,15 +60,15 @@
                             <el-submenu index="1">
                                 <template slot="title">
                                     <i class="el-icon-setting"></i>
-                                    <span>系统管理</span>
+                                    <span>System Manage</span>
                                 </template>
                                 <el-menu-item-group>
                                     <el-menu-item index="1-1">
-                                        <span slot="title">服务器管理</span>
+                                        <span slot="title">Server Config</span>
                                     </el-menu-item>
 
                                     <el-menu-item index="1-2">
-                                        <span slot="title">用户管理</span>
+                                        <span slot="title">User Config</span>
                                     </el-menu-item>
                                 </el-menu-item-group>
                             </el-submenu>
@@ -77,11 +76,11 @@
                             <el-submenu index="2">
                                 <template slot="title">
                                     <i class="el-icon-news"></i>
-                                    <span>公告管理</span>
+                                    <span>Notice</span>
                                 </template>
                                 <el-menu-item-group>
                                     <el-menu-item index="2-1">
-                                        <span slot="title">公告设置</span>
+                                        <span slot="title">Notice Config</span>
                                     </el-menu-item>
 
                                 </el-menu-item-group>
@@ -90,15 +89,15 @@
                             <el-submenu index="3">
                                 <template slot="title">
                                     <i class="el-icon-edit-outline"></i>
-                                    <span>题目管理</span>
+                                    <span>Problem</span>
                                 </template>
                                 <el-menu-item-group>
                                     <el-menu-item index="3-1">
-                                        <span slot="title">题目列表</span>
+                                        <span slot="title">Problem List</span>
                                     </el-menu-item>
 
                                     <el-menu-item index="3-2">
-                                        <span slot="title">新建题目</span>
+                                        <span slot="title">Create Problem</span>
                                     </el-menu-item>
                                 </el-menu-item-group>
                             </el-submenu>
@@ -106,15 +105,15 @@
                             <el-submenu index="4">
                                 <template slot="title">
                                     <i class="el-icon-service"></i>
-                                    <span>比赛管理</span>
+                                    <span>Contest</span>
                                 </template>
                                 <el-menu-item-group>
                                     <el-menu-item index="4-1">
-                                        <span slot="title">比赛信息</span>
+                                        <span slot="title">Contest Info</span>
                                     </el-menu-item>
 
                                     <el-menu-item index="4-2">
-                                        <span slot="title">新建比赛</span>
+                                        <span slot="title">Create Contest</span>
                                     </el-menu-item>
                                 </el-menu-item-group>
                             </el-submenu>
