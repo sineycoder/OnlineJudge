@@ -28,13 +28,18 @@ $(function(){
                 {title:'公告',content:'三大法师打发士大夫撒旦飞洒发的发热问题问去玩儿',time:'2018-1-1'},
                 {title:'公告',content:'三大法师打发士大夫撒旦飞洒发的发热问题问去玩儿',time:'2018-1-1'}
             ],
-            h:['problems.html','rank.html','submit.html','contest.html']
+            leftLink:['problems.html','rank.html','submit.html','contest.html','#','setting.html'],
         },
 
         methods:{
             handleSelect(key, keyPath) {
-                // var v = parseInt(key) - 1;
-                // window.location.href = this.h[v];
+                 var v = parseInt(key) - 1;
+                 window.location.href = this.leftLink[v];
+            },
+            handle(key, keyPath) {
+                if(key=='1-2'){
+                    window.location.href='../Admin/userConfig.html';
+                }
             },
 
         }

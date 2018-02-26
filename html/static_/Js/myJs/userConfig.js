@@ -14,7 +14,7 @@ $(function(){
     setSize();
     vm = new Vue({
         data:{
-            brandLink:'#',
+            brandLink:'../pages/index.html',
             returnPage:'index.html',
             brand:'JSUT',
             admin:{is:true},
@@ -49,14 +49,18 @@ $(function(){
                 grant:'superAdmin'
             }],
             multipleSelection: [],
-            loading: true
+            loading: true,
+            adminLink:[['serverConfig.html','userConfig.html']],
+
         },
         methods:{
             handleSelect(key, keyPath) {
-                if(key=='1-1')v = 'serverConfig.html';
-                else if(key=='1-2')v = 'userConfig.html';
-                window.location.href = v;
-                console.log(key+" "+keyPath);
+                var v1 = parseInt(key.split('-')[0])-1;
+                var v2 = parseInt(key.split('-')[1])-1;
+                // var v='';
+                // if(key=='1-1')v = 'serverConfig.html';
+                // else if(key=='1-2')v = 'userConfig.html';
+                window.location.href=this.adminLink[v1][v2];
             },
             //左侧选择框
             toggleSelection(rows) {

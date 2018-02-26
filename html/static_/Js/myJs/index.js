@@ -6,12 +6,17 @@ $(function(){
     var vm = new Vue({
         data:{
             menu:['题目','待定','关于'],                    //navigator title
-            links:['#','#','#'],                            //navigator link
+            links:['problems.html','#','#'],                            //navigator link
             title:'welcome to JSUT online judge',           //the theme
             brand:'JSUT OJ',                              //the navigator brand -- on the right
             brandLink:'#',
             act1:true,                                     //first page animation active
             Sindex:-1                                       //now page index
+        },
+        methods:{
+            enter(){
+                window.location.href = 'account.html';
+            }
         }
     }).$mount('#index');
     //初始化fullpage

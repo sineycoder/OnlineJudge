@@ -77,17 +77,17 @@ $(function(){
                 active:false,
                 ip:'',
                 token:''
-            }
+            },
+            adminLink:[['serverConfig.html','userConfig.html']],
         },
         methods:{
             handleSelect(key, keyPath) {
-                var v1 = parseInt(key.split('-')[0]);
-                var v2 = parseInt(key.split('-')[1]);
+                var v1 = parseInt(key.split('-')[0])-1;
+                var v2 = parseInt(key.split('-')[1])-1;
                 // var v='';
                 // if(key=='1-1')v = 'serverConfig.html';
                 // else if(key=='1-2')v = 'userConfig.html';
-                // window.location.href=v;
-                console.log(v1+" "+v2);
+                window.location.href=this.adminLink[v1][v2];
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val;

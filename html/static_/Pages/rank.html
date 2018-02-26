@@ -38,7 +38,7 @@
                 <el-button type="primary" icon="search">搜索</el-button>
             </el-col>
             <el-col :span="14">
-                <el-menu  class="el-menu-demo dropdown" mode="horizontal" @select="handleSelect" style="background-color: #F8F8F8;float:right;">
+                <el-menu  class="el-menu-demo dropdown" mode="horizontal" @select="handle" style="background-color: #F8F8F8;float:right;">
                     <el-submenu index="1">
                         <template slot="title">root</template>
                         <el-menu-item index="1-1">submission</el-menu-item>
@@ -57,6 +57,7 @@
                         <a href="#" @click="pp()"><img width="150px" height="150px" :src="imgSrc" alt="暂无图片" style="border-radius: 50%;"/></a>
                     </div>
                     <el-menu
+                            default-active="2"
                             class="el-menu-vertical-demo"
                             @select="handleSelect"
                             background-color="#1C2B36"

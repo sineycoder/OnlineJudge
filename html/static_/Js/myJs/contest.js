@@ -17,7 +17,6 @@ $(function(){
             page:{'pageNow':'10','pageNum':10},
             returnPage:"../Admin/index.html",                        //右上角返回主界面地址
             brand:"JSUT",                                   //左上角标题
-            links:["problem.html","#","#","#","#"],                //每个标签的链接
             brandLink:"#",                                  //左上角标题链接
             searchContent:"#",                              //搜索框的内容
             imgSrc:"../Images/default_portrait.jpg",        //用户图片地址
@@ -29,23 +28,28 @@ $(function(){
                 {'title':'2017新生赛dddddd','date':'2017-01-21 11:11:11','lock':true,'time':'3 hours','status':'Ended','participation':'20','href':'aaa'}
             ],
             input1:'',
-            currentPage3:5
+            currentPage3:5,
+            leftLink:['problems.html','rank.html','submit.html','contest.html','#','setting.html'],
             /*
              <span class="glyphicon glyphicon-ok" style="color:green;"></span>    pass
              <span class="glyphicon glyphicon-minus" style="color:red;"></span>   not pass
-
              * */
         },
         methods:{
             handleSelect(key, keyPath) {
-                console.log(key, keyPath);
+                var v = parseInt(key) - 1;
+                window.location.href = this.leftLink[v];
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-            }
+            },handle(key, keyPath) {
+                if(key=='1-2'){
+                    window.location.href='../Admin/userConfig.html';
+                }
+            },
         }
     }).$mount("#contest");
     $.ajax({

@@ -57,7 +57,8 @@ $(function(){
                 cpu:170,
                 memory:17,
                 language:'C'
-            }]
+            }],
+            leftLink:['problems.html','rank.html','submit.html','contest.html','#','setting.html'],
             /*
              <span class="glyphicon glyphicon-ok" style="color:green;"></span>    pass
              <span class="glyphicon glyphicon-minus" style="color:red;"></span>   not pass
@@ -66,7 +67,8 @@ $(function(){
         },
         methods:{
             handleSelect(key, keyPath) {
-                console.log(key, keyPath);
+                var v = parseInt(key) - 1;
+                window.location.href = this.leftLink[v];
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -83,7 +85,12 @@ $(function(){
             filterHandler(value, row, column) {
                 const property = column['property'];
                 return row[property] === value;
-            }
+            },
+            handle(key, keyPath) {
+                if(key=='1-2'){
+                    window.location.href='../Admin/userConfig.html';
+                }
+            },
         }
     }).$mount("#submit");
     $.ajax({

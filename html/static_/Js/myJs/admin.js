@@ -36,11 +36,17 @@ $(function(){
                 date: '2016-05-03',
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1516 弄'
-            }]
+            }],
+            leftLink:['problems.html','rank.html','submit.html','contest.html','#','setting.html'],
         },
         methods:{
             handleSelect(key, keyPath) {
-                console.log(key, keyPath);
+                var v = parseInt(key) - 1;
+                window.location.href = this.leftLink[v];
+            },handle(key, keyPath) {
+                if(key=='1-2'){
+                    window.location.href='../Admin/userConfig.html';
+                }
             },
         }
     }).$mount("#admin");
