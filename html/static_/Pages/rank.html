@@ -11,11 +11,7 @@
     <script src="../Js/vue.js"></script>
     <script src="../Js/eui.js"></script>
     <script src="../Js/myJs/rank.js"></script>
-    <style>
-        .el-table--scrollable-x .el-table__body-wrapper{
-            overflow:hidden;
-        }
-    </style>
+
 
 </head>
 <body>
@@ -142,7 +138,7 @@
 
                             <el-table-column
                                     prop="motto"
-                                    width="539"
+                                    width="450"
                                     label="motto">
                             </el-table-column>
 
@@ -163,8 +159,7 @@
                             <el-table-column
                                     prop="ac"
                                     label="ac"
-                                    sortable
-                                    width="150">
+                                    sortable>
                                 <template slot-scope="scope">
                                     <div class="progress" style="box-shadow: #444 0px 0px 5px;height: 20px;margin: 0px;">
                                         <div class="progress-bar progress-bar-striped active" aria-valuemin="0.00" aria-valuemax="100.00" :style="'width:'+scope.row.ac+'%'">

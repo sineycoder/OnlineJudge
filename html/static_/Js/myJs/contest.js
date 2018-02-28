@@ -59,7 +59,6 @@ $(function(){
         success:function(res,name,status){
             $('.load').css({'display':'none'});
             $('#contest').animate({'opacity':'1'},1000);
-
         },
         error:function(excep,text){
             alert(text);
