@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jsut.ecoder.dao.CommonMapper">
+
+    <select id="selectVisibleNotices" resultType="notice">
+      SELECT a.noticeId,a.title,a.content,a.isShow,b.userName createUserName,a.createTime,a.currentUpdateTime
+      FROM web_notice a
+      JOIN web_user b
+      ON a.isShow = 1 AND a.createUserId = b.userId
+    </select>
+
+    <select id="selectSubmitsCounts" resultType="int">
+        SELECT COUNT(*)
+        FROM web_submit_list w
+        <if test="userName != null">
+          WHERE w.userId = (SELECT u.userId FROM web_user u WHERE u.userName = #{userName,jdbcType=VARCHAR})
+        </if>
+    </select>
+
+    <select id="selectSubmitsTotals" resultType="submitsRecords">
+        SELECT s.id,s.submitDate,u.userName,p.problemId,s.result,s.cpuTime,s.memorySize,s.lang language
+        FROM web_submit_list s
+        JOIN web_user u
+        ON u.userId = s.userId
+        JOIN web_problems p
+        ON p.problemId = s.problemId
+        <if test="userName != null">
+          WHERE u.userName = #{userName,jdbcType=VARCHAR}
+        </if>
+        ORDER BY s.id DESC
+        LIMIT #{start,jdbcType=INTEGER}, #{step,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectProblemsCounts" resultType="int">
+        SELECT COUNT(*)
+        FROM web_problems
+    </select>
+    
+    <resultMap id="problemMap" type="problemRecords">
+        <id property="problemId" column="problemId"></id>
+        <result property="problemTitle" column="problemTitle"></result>
+        <result property="problemDifficulty" column="problemDifficulty"></result>
+        <result property="submitTotal" column="submitTotal"></result>
+        <collection property="result" ofType="result">
+            <id property="resultName" column="resultName"></id>
+            <result property="total" column="total"></result>
+        </collection>
+    </resultMap>
+    
+    <select id="selectProblemsTotals" resultMap="problemMap">
+        SELECT xx.problemId,xx.problemTitle,xx.problemDifficulty,xx.submitTotal,kk.result resultName,kk.total
+        FROM (SELECT aa.problemId,aa.problemTitle,aa.problemDifficulty,IF(SUM(bb.result) IS NULL,0,COUNT(*)) submitTotal
+        FROM (SELECT t.problemId,t.problemTitle,t.problemDifficulty
+        FROM web_problems t
+        LIMIT #{start,jdbcType=INTEGER}, #{step,jdbcType=INTEGER}) aa
+        LEFT JOIN web_submit_list bb
+        ON aa.problemId = bb.problemId
+        GROUP BY aa.problemId) xx
+        LEFT JOIN (SELECT a.problemId,a.result,COUNT(*) total
+        FROM web_submit_list a
+        GROUP BY a.problemId,a.result
+        ORDER BY a.problemId) kk
+        ON xx.problemId = kk.problemId
+    </select>
+
+    <resultMap id="problemTagMap" type="problemRecords">
+        <id property="problemId" column="problemId"></id>
+        <collection property="tags" ofType="tag">
+            <id property="tagId" column="tagId"></id>
+            <result property="tagName" column="tagName"></result>
+        </collection>
+    </resultMap>
+
+    <select id="selectProblemsTags" resultMap="problemTagMap">
+        SELECT a.problemId,c.tagId,c.tagName
+        FROM (SELECT *
+        FROM web_problems
+        LIMIT  #{start,jdbcType=INTEGER}, #{step,jdbcType=INTEGER}) a
+        JOIN web_problems_tag b
+        ON a.problemId = b.problemId
+        LEFT JOIN web_tag c
+        ON b.tagId = c.tagId
+        ORDER BY a.problemId,tagId
+    </select>
+    
+    <select id="selectRankResults" resultType="rankUsers">
+        SELECT aa.userId,cc.userName,cc.infoMotto,cc.userTag,aa.submitTotal,IFNULL(bb.ac/aa.submitTotal,0) AS ratio
+        FROM (SELECT b.userId,IF(SUM(c.result) IS NULL,0,COUNT(*)) AS submitTotal
+        FROM(SELECT a.userId
+        FROM web_user AS a
+        LIMIT #{start,jdbcType=INTEGER}, #{step,jdbcType=INTEGER}) AS b
+        LEFT JOIN web_submit_list AS c
+        ON b.userId = c.userId
+        GROUP BY b.userId) AS aa
+        LEFT JOIN (SELECT e.userId,COUNT(*) AS ac
+        FROM(SELECT d.userId
+        FROM web_user AS d
+        LIMIT #{start,jdbcType=INTEGER}, #{step,jdbcType=INTEGER}) AS e
+        LEFT JOIN web_submit_list AS f
+        ON e.userId = f.userId
+        WHERE f.result='AC'
+        GROUP BY e.userId) AS bb
+        ON aa.userId = bb.userId
+        LEFT JOIN web_user AS cc
+        ON aa.userId = cc.userId
+        <if test="userName != null">
+            WHERE cc.userName = #{userName,jdbcType=VARCHAR}
+        </if>
+        ORDER BY submitTotal DESC,ratio DESC
+    </select>
+    
+    <select id="selectContestTotals" resultType="int">
+      SELECT COUNT(*)
+      FROM web_contest
+    </select>
+    
+    <select id="selectContestResult" resultType="contest">
+        SELECT a.id,a.contestName,a.startTime,TIMEDIFF(a.endTime,a.startTime) times,a.contestPassword,a.contestStatus,a.contestVisible,IF(SUM(b.userId) IS NULL,0,COUNT(*)) total
+        FROM web_contest a
+        LEFT JOIN web_user_contest b
+        ON a.id = b.contestId
+        LEFT JOIN web_user c
+        ON b.userId = c.userId
+        GROUP BY a.id
+        LIMIT #{start,jdbcType=INTEGER}, #{step,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="problemCodingMap" type="problemRecords">
+        <id property="problemId" column="problemId"></id>
+        <result property="problemTitle" column="problemTitle"></result>
+        <result property="problemDifficulty" column="problemDifficulty"></result>
+        <result property="problemAuthor" column="problemAuthor"></result>
+        <result property="problemDescription" column="problemDescription"></result>
+        <result property="problemInputDescription" column="problemInputDescription"></result>
+        <result property="problemOutputDescription" column="problemOutputDescription"></result>
+        <result property="problemSample" column="problemSample"></result>
+        <result property="problemHint" column="problemHint"></result>
+        <result property="problemSource" column="problemSource"></result>
+        <collection property="result" ofType="result">
+            <id property="resultName" column="resultName"></id>
+            <result property="total" column="total"></result>
+        </collection>
+    </resultMap>
+
+    <!-- 把sample弄到前台转换json -->
+    <select id="selectProblemCodingById" resultMap="problemCodingMap">
+        SELECT c.problemId,c.problemTitle,c.problemDifficulty,c.problemAuthor,c.problemDescription,c.problemInputDescription,c.problemOutputDescription,c.problemSample,c.problemHint,c.problemSource,b.result resultName,COUNT(*) total
+        FROM (SELECT *
+        FROM web_problems a
+        WHERE a.problemId = #{id,jdbcType=INTEGER}) c
+        LEFT JOIN web_submit_list b
+        ON c.problemId = b.problemId
+        GROUP BY b.result
+    </select>
+
+    <select id="selectProblemParamsById" resultType="problemParams">
+        SELECT c.languageId,c.languageName,b.problemMemory,b.problemCpuTime
+        FROM (SELECT *
+        FROM web_problems_language a
+        WHERE a.problemId = #{id,jdbcType=INTEGER}) b
+        LEFT JOIN web_language c
+        ON b.languageId = c.languageId
+    </select>
+
+</mapper>
