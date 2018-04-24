@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jsut.ecoder.dao.BackendMapper">
+
+
+    <sql id="NOTICE">
+        <trim suffixOverrides=",">
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="isShow != null">
+                isShow = #{isShow},
+            </if>
+            <if test="currentUpdateTime != null">
+                currentUpdateTime = #{currentUpdateTime},
+            </if>
+        </trim>
+    </sql>
+    <update id="updateNotice">
+        UPDATE web_notice
+        SET <include refid="NOTICE"/>
+        WHERE noticeId = #{noticeId}
+    </update>
+
+    <sql id="config">
+        <trim suffixOverrides=",">
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="registerPermission != null">
+                registerPermission=#{registerPermission},
+            </if>
+            <if test="footer != null">
+                footer=#{footer},
+            </if>
+            <if test="email != null">
+                email=#{email},
+            </if>
+            <if test="emailPass != null">
+                emailPass=#{emailPass},
+            </if>
+        </trim>
+    </sql>
+    
+    <update id="updateBackendConfig">
+        UPDATE backend_config
+        SET <include refid="config"/>
+    </update>
+
+    <insert id="insertNewProblem" parameterType="problemRecords" keyProperty="problemId" useGeneratedKeys="true">
+      INSERT INTO web_problems(<if test="problemId != null">problemId,</if><if test="problemContestId != null">problemContestId,</if>problemTitle, problemDescription, problemInputDescription, problemOutputDescription, problemSample, problemDifficulty, problemIsShow, problemType, problemReturn, problemHint, problemSource, problemAuthor, problemCreateTime, problemInput,problemOutput)
+      VALUES (<if test="problemId != null">#{problemId},</if><if test="problemContestId != null">#{problemContestId},</if>#{problemTitle},#{problemDescription},#{problemInputDescription},#{problemOutputDescription},#{problemSample},#{problemDifficulty},#{problemIsShow},#{spj},#{returnErr},#{problemHint},#{problemSource},#{problemAuthor},#{problemCreateTime},#{problemInput},#{problemOutput});
+    </insert>
+
+    <select id="selectIdByTagName" resultType="java.lang.Integer">
+        SELECT tagId
+        FROM web_tag
+        WHERE tagName = #{tagname}
+    </select>
+
+    <insert id="insertTag" keyProperty="tagId" useGeneratedKeys="true">
+        INSERT INTO web_tag(tagName,createTime)
+        values(#{tagName},#{createTime})
+    </insert>
+
+    <insert id="insertTagProblem">
+        INSERT INTO web_problems_tag(tagId,problemId)
+        values(#{tagId},#{problemId})
+    </insert>
+
+    <!--使用动态sql拼接，实现快速插入-->
+    <sql id="value">
+        <trim suffixOverrides=")" prefixOverrides="(">
+            <foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+                (#{item.problemId},#{item.languageId},#{item.problemMemory},#{item.problemCpuTime})
+            </foreach>
+        </trim>
+    </sql>
+    <insert id="insertLanguagesParam" parameterType="java.util.List">
+        INSERT INTO web_problems_language(problemId,languageId,problemMemory,problemCpuTime)
+        VALUES
+        <include refid="value"></include>
+    </insert>
+
+    <insert id="insertNotice"  keyProperty="noticeId" useGeneratedKeys="true">
+        INSERT INTO web_notice(title,content,isShow,createUserId,createTime,currentUpdateTime)
+        VALUES (#{title},#{content},#{isShow},#{createUserId},#{createTime},#{currentUpdateTime})
+    </insert>
+
+    <insert id="insertContest">
+        INSERT INTO web_contest(<if test="id != null">id,</if>contestName,contestDescription,startTime,endTime,createTime,contestPassword,contestVisible,contestCreator)
+        VALUES (<if test="id != null">#{id},</if>#{contestName},#{contestDescription},#{startTime},#{endTime},#{createTime},#{contestPassword},#{contestVisible},#{contestCreator})
+    </insert>
+
+
+    <sql id="PROBLEM">
+        <trim suffixOverrides=",">
+            <if test="problemIsShow != null">
+                problemIsShow = #{problemIsShow},
+            </if>
+        </trim>
+    </sql>
+    <update id="updateProblem">
+        UPDATE web_problems
+        SET <include refid="PROBLEM"/>
+        WHERE problemId = #{problemId}
+    </update>
+
+    <sql id="CONTEST">
+        <trim suffixOverrides=",">
+            <if test="contestVisible != null">
+                contestVisible = #{contestVisible},
+            </if>
+        </trim>
+    </sql>
+    <update id="updateContest">
+        UPDATE web_contest
+        SET <include refid="CONTEST"/>
+        WHERE id = #{id}
+    </update>
+
+</mapper>
