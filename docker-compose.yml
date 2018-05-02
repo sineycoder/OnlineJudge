@@ -2,14 +2,14 @@ version: "3"
 services:
  
     oj_redis:
-        image: oj_redis:1.0
+        image: registry.cn-hangzhou.aliyuncs.com/siney/redis:1.0
         container_name: oj_redis
         restart: always
         volumes:
           - $PWD/data/redis:/data
 
     oj_nginx:
-        image: oj_nginx:1.0
+        image: registry.cn-hangzhou.aliyuncs.com/siney/nginx:1.0
         container_name: oj_nginx
         depends_on:
           - oj_core
@@ -25,12 +25,12 @@ services:
         restart: always
         
     oj_rabbitmq: 
-        image: oj_rabbitmq:1.0
+        image: registry.cn-hangzhou.aliyuncs.com/siney/rabbitmq:1.0
         container_name: oj_rabbitmq
         restart: always
         
     oj_mysql:
-        image: oj_mysql:1.0
+        image: registry.cn-hangzhou.aliyuncs.com/siney/mysql:1.0
         container_name: oj_mysql
         restart: always
         volumes:
@@ -39,7 +39,7 @@ services:
           - MYSQL_ROOT_PASSWORD=398653206 #密码请不要更改
     
     oj_core:
-        image: oj_core:1.0
+        image: registry.cn-hangzhou.aliyuncs.com/siney/onlinejudge:1.0
         container_name: oj_core
         restart: always
         cap_drop:
