@@ -35,6 +35,7 @@ services:
         restart: always
         volumes:
           - $PWD/data/mysql:/var/lib/mysql
+          - $PWD/data/sql:/docker-entrypoint-initdb.d
         environment:
           - MYSQL_ROOT_PASSWORD=398653206 #密码请不要更改
     
@@ -53,7 +54,7 @@ services:
           - oj_redis
         links:
           - oj_mysql:oj_mysql
-          - oj_rabbitmq:OJ_rabbitmq
+          - oj_rabbitmq:oj_rabbitmq
           - oj_redis:oj_redis
         volumes:
           - $PWD/data/core:/home/onlinejudge
