@@ -35,12 +35,11 @@ services:
         restart: always
         volumes:
           - $PWD/data/mysql:/var/lib/mysql
-          - $PWD/data/sql:/docker-entrypoint-initdb.d
         environment:
           - MYSQL_ROOT_PASSWORD=398653206 #密码请不要更改
     
     oj_core:
-        image: registry.cn-hangzhou.aliyuncs.com/siney/onlinejudge:1.0
+        image: registry.cn-hangzhou.aliyuncs.com/siney/onlinejudge:1.1
         container_name: oj_core
         restart: always
         cap_drop:
@@ -54,7 +53,7 @@ services:
           - oj_redis
         links:
           - oj_mysql:oj_mysql
-          - oj_rabbitmq:oj_rabbitmq
+          - oj_rabbitmq:OJ_rabbitmq
           - oj_redis:oj_redis
         volumes:
           - $PWD/data/core:/home/onlinejudge
