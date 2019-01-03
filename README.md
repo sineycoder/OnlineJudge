@@ -5,10 +5,10 @@
 这里我们以`ubuntu16.04`为例子，其他任何能装docker的OS也都行。<br/><br/>
 建议：部署前使用`sudo su`指令升级为`root`用户来操作，避免后序因为权限问题带来的不便。
 
-* 安装环境`apt-get update && apt-get install -y vim curl git`
+* 安装环境`apt-get update && apt-get install -y vim curl git python-pip`
 * 安装docker使用`curl -sSL https://get.daocloud.io/docker | sh` (适用于Ubuntu，Debian,Centos等大部分Linux，会3小时同步一次Docker官方资源,安装时有时较慢，请耐心等待)
 * 安装docker-compose:
-  1. <code>curl -L https://get.daocloud.io/docker/compose/releases/download/1.21.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose</code>
+  1. <code>pip install docker-compose</code>
   2. <code>chmod +x /usr/local/bin/docker-compose</code> 
 
 # 准备部署
